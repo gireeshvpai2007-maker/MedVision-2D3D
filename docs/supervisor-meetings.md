@@ -84,3 +84,29 @@ Knee Landmark Detection
 Temporal Tracking
         ↓
 Multi-View Landmark Data
+
+Future Direction
+
+After establishing reliable 2D landmark detection and tracking, the project is expected to progress toward:
+
+Multi-view landmark correspondence
+3D reconstruction
+Biomechanical analysis
+Identification of abnormal movement patterns
+Clinical interpretation using expert-labelled data
+
+The later stages are expected to use data and clinical knowledge provided by orthopedic experts.
+
+Current Scope Boundary
+
+The current task is limited to knee landmark detection and tracking.
+
+The model is not currently being developed to directly diagnose ACL injury or classify specific knee conditions.
+
+Immediate Next Steps
+Finalize the numbered landmark schema.
+Obtain and inspect the project dataset.
+Determine the annotation format and available landmark labels.
+Inspect the four camera views and video characteristics.
+Establish the baseline landmark detection approach.
+Evaluate the initial landmark detection before progressing to tracking and multi-view reconstruction.
