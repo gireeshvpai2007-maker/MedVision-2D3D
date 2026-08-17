@@ -1,0 +1,70 @@
+# Canonical knee landmark schema for MedVision-2D3D
+#
+# Landmark identities are currently represented only by
+# the numerical labels used in the reference annotation image.
+# Anatomical names will be added after confirmation from
+# the project supervisor / orthopedic expert.
+
+schema_version: "1.0"
+
+landmark_count: 20
+
+landmarks:
+  1:
+    name: null
+  2:
+    name: null
+  3:
+    name: null
+  4:
+    name: null
+  5:
+    name: null
+  6:
+    name: null
+  7:
+    name: null
+  8:
+    name: null
+  9:
+    name: null
+  10:
+    name: null
+  11:
+    name: null
+  12:
+    name: null
+  13:
+    name: null
+  14:
+    name: null
+  15:
+    name: null
+  16:
+    name: null
+  17:
+    name: null
+  18:
+    name: null
+  19:
+    name: null
+  20:
+    name: null
+
+camera_views:
+  - front
+  - rear
+  - left_side
+  - right_side
+
+coordinate_system:
+  type: "image_pixel"
+  origin: "top_left"
+  x_axis: "right"
+  y_axis: "down"
+
+output:
+  position:
+    - x
+    - y
+  confidence: true
