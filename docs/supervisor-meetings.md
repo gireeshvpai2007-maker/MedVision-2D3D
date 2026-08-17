@@ -31,3 +31,56 @@ The supervisor will provide the complete research problem, resources, and projec
 - Maintain the literature matrix.
 - Do not commit patient data or unpublished research material.
 - Do not begin the final algorithm implementation until the research problem is confirmed.
+
+## 2026-08-17 — Task and Approach Clarification
+
+### Assigned Initial Task
+
+The initial CSE/AI component focuses on developing a model to identify and track standardized knee landmarks from 2D video.
+
+### Experimental Setup
+
+The intended setup consists of four camera views:
+
+- Front
+- Rear
+- Left side
+- Right side
+
+The cameras observe the subject while walking through the experimental setup.
+
+### Landmark Representation
+
+The knee landmarks will initially be represented using the numbered points provided in the reference image.
+
+The anatomical names of the numbered landmarks are not yet finalized and will be confirmed with the supervisor / orthopedic expert.
+
+The same landmark numbering should be maintained consistently across the four camera views wherever the landmark is visible.
+
+### Initial Model Objective
+
+For each frame of the 2D video, the model should identify the predefined knee landmarks and determine their 2D image coordinates.
+
+The expected output for each detected landmark is:
+
+- Landmark ID
+- X coordinate
+- Y coordinate
+- Confidence score
+
+The landmarks should then be tracked across consecutive frames.
+
+### Initial Pipeline
+
+```text
+Four-Camera 2D Video
+        ↓
+Frame Extraction
+        ↓
+Knee Landmark Detection
+        ↓
+2D Landmark Coordinates
+        ↓
+Temporal Tracking
+        ↓
+Multi-View Landmark Data
