@@ -1,55 +1,51 @@
-# Canonical knee landmark schema for MedVision-2D3D
-#
-# Landmark identities are currently represented only by
-# the numerical labels used in the reference annotation image.
-# Anatomical names will be added after confirmation from
+# Landmark identities and anatomical names correspond
+# to the current reference annotation scheme.
+# Final annotation semantics should be confirmed with
 # the project supervisor / orthopedic expert.
-
 schema_version: "1.0"
-
 landmark_count: 20
 
 landmarks:
   1:
-    name: null
+    name: "Patella"
   2:
-    name: null
+    name: "Tibial tuberosity"
   3:
-    name: null
+    name: "Anterior tubercle (Gerdy's tubercle)"
   4:
-    name: null
+    name: "Anterior border of tibia"
   5:
-    name: null
+    name: "Patellar tendon"
   6:
-    name: null
+    name: "Quadriceps tendon"
   7:
-    name: null
+    name: "Vastus lateralis"
   8:
-    name: null
+    name: "Vastus medialis"
   9:
-    name: null
+    name: "Pes anserinus tendons"
   10:
-    name: null
+    name: "Pes anserinus area on medial face of tibia"
   11:
-    name: null
+    name: "Muscles of anterior compartment of leg"
   12:
-    name: null
+    name: "Muscles of posterior compartment of leg"
   13:
-    name: null
+    name: "Head of fibula"
   14:
-    name: null
+    name: "Shaft of fibula"
   15:
-    name: null
+    name: "Lateral epicondyle"
   16:
-    name: null
+    name: "Iliotibial tract"
   17:
-    name: null
+    name: "Biceps femoris muscle"
   18:
-    name: null
+    name: "Popliteal fossa"
   19:
-    name: null
+    name: "Flexion crease of knee"
   20:
-    name: null
+    name: "Medial epicondyle"
 
 camera_views:
   - front
