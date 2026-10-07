@@ -6,7 +6,9 @@ MedVision-2D3D is an interdisciplinary research project focused on developing a 
 
 The **current implementation stage** focuses on detecting and tracking standardized knee landmarks from 2D video captured using a four-camera setup. The resulting multi-view landmark data is intended to provide the foundation for later 3D reconstruction, biomechanical analysis, and expert-guided clinical interpretation.
 
-> ⚠️ **Research status:** The project is under active development. The exact anatomical terminology, dataset characteristics, model architecture, evaluation protocol, and later clinical objectives will be finalized as the dataset and expert guidance become available.
+A new systems-engineering direction discussed on **20 August 2026** is a rover-based camera platform designed to support smooth sideways camera movement and maintain useful observation while the subject moves. This is currently a proposed extension and is not yet represented as a completed hardware system.
+
+> ⚠️ **Research status:** The project is under active development. The exact anatomical terminology, dataset characteristics, model architecture, evaluation protocol, rover design, control strategy, and later clinical objectives will be finalized as the dataset and expert/industrial guidance become available.
 
 ---
 
@@ -63,6 +65,28 @@ The system will then track these landmark coordinates across consecutive video f
              Expert-Guided Interpretation
 ```
 
+### New hardware extension
+
+The 20 August 2026 meeting introduced a proposed rover/camera layer around the capture system:
+
+```text
+Moving Subject
+      ↓
+Dynamic Rover-Based Camera Platform
+      ↓
+Smooth Camera Movement / Subject Following
+      ↓
+Multi-View Video Capture
+      ↓
+20-Point Knee Landmark Detection
+      ↓
+Temporal Tracking
+      ↓
+Future Multi-View 3D Analysis
+```
+
+The rover is currently a **proposed hardware extension**. The immediate AI priority remains reliable landmark detection and temporal tracking.
+
 ### Current scope
 
 The present stage is **landmark detection and tracking**. It is not currently intended to directly diagnose ACL injury or classify specific knee conditions.
@@ -116,6 +140,42 @@ Patient/clinical video and other restricted research data should **not** be comm
 
 ---
 
+## 🤖 Rover / Dynamic Camera Direction
+
+The rover concept is intended to solve a practical capture problem: a moving subject can leave the useful field of view of a fixed camera or produce less useful viewpoints during movement.
+
+### Current concept
+
+- A camera is mounted on a mobile rover/platform.
+- The platform is intended to provide controlled sideways movement.
+- The camera should move smoothly while maintaining observation of the subject.
+- Subject-following and camera-positioning logic can be developed and validated separately from the landmark model.
+- The rover will eventually feed the same perception pipeline rather than becoming a separate analysis system.
+
+### Development strategy
+
+The rover should be developed incrementally:
+
+```text
+Manual / controlled rover movement
+              ↓
+Camera-following control logic
+              ↓
+Subject tracking integration
+              ↓
+Smooth movement validation
+              ↓
+Integration with multi-camera capture
+```
+
+The physical rover design, motors, control electronics, navigation method, and final tracking algorithm are still under development and should not be treated as finalized specifications.
+
+More detailed planning is documented in:
+
+`docs/rover-camera-system.md`
+
+---
+
 ## 🧠 Development Stages
 
 ### Stage 1 — Dataset Understanding 🔄
@@ -135,25 +195,33 @@ Patient/clinical video and other restricted research data should **not** be comm
 - Produce `(x, y)` coordinates and confidence values
 - Evaluate localization accuracy
 
-### Stage 3 — Temporal Tracking ⏳
+### Stage 3 — Video-Based Temporal Tracking ⏳
 
 - Track landmarks across consecutive frames
 - Analyze landmark trajectories
 - Evaluate tracking consistency
 
-### Stage 4 — Multi-View Analysis ⏳
+### Stage 4 — Rover / Dynamic Camera Prototype 🆕
+
+- Define the camera platform movement requirements
+- Prototype controlled sideways movement
+- Develop subject-following / camera-positioning logic
+- Validate smooth camera motion
+- Integrate the camera layer with the perception pipeline
+
+### Stage 5 — Multi-View Analysis ⏳
 
 - Associate corresponding landmarks across camera views
 - Establish multi-view consistency
 - Prepare data for 3D reconstruction
 
-### Stage 5 — 3D Reconstruction ⏳
+### Stage 6 — 3D Reconstruction ⏳
 
 - Investigate reconstruction methods
 - Estimate 3D landmark positions
 - Validate reconstruction against appropriate ground truth when available
 
-### Stage 6 — Biomechanical / Clinical Analysis ⏳
+### Stage 7 — Biomechanical / Clinical Analysis ⏳
 
 - Extract movement-related features
 - Investigate normal and abnormal movement patterns
@@ -182,6 +250,7 @@ MedVision-2D3D/
 ├── docs/
 │   ├── literature-review.md        # Literature review and research matrix
 │   ├── research-problem.md         # Current research problem and scope
+│   ├── rover-camera-system.md      # New rover/dynamic-camera direction
 │   └── supervisor-meetings.md      # Formal supervisor meeting record
 │
 ├── experiments/
@@ -197,12 +266,11 @@ MedVision-2D3D/
 ├── src/
 │   ├── preprocessing/              # Data and frame preprocessing
 │   ├── models/                     # AI/ML models
-│   │   └── knee_landmark/           # Knee landmark detector
+│   │   └── knee_landmark/          # Knee landmark detector
 │   ├── tracking/                   # Temporal landmark tracking
 │   ├── evaluation/                 # Evaluation utilities
 │   └── visualization/              # Landmark/tracking visualization
 │
-├── meeting_notes.md                # Detailed working notes
 ├── requirements.txt                # Current Python environment
 ├── .gitignore
 └── README.md
@@ -231,6 +299,8 @@ Evaluation
       ↓
 Tracking
       ↓
+Rover / Dynamic Camera Integration
+      ↓
 Multi-View Analysis
       ↓
 3D Reconstruction
@@ -252,6 +322,7 @@ The project currently uses Python-based research tooling, with the final ML stac
 - Matplotlib
 - Jupyter
 - Future ML framework/model dependencies as required
+- Future rover control / embedded components as the hardware design is finalized
 
 The repository intentionally avoids committing model-specific dependencies until the actual dataset and task constraints have been examined.
 
@@ -264,11 +335,13 @@ The main research documentation is maintained in:
 - `docs/research-problem.md` — current research question, scope, input/output and future direction
 - `docs/literature-review.md` — literature review and research matrix
 - `docs/supervisor-meetings.md` — formal supervisor discussions and task clarification
-- `meeting_notes.md` — detailed working notes and implementation direction
+- `docs/rover-camera-system.md` — proposed rover and dynamic-camera direction
+
+Detailed meeting notes should record decisions and implementation direction while avoiding restricted or patent-sensitive information.
 
 ---
 
-## 🔐 Data and Research Ethics
+## 🔐 Data, IP and Research Ethics
 
 This repository is intended for research documentation and reproducible code development.
 
@@ -278,7 +351,10 @@ The following should not be publicly committed without explicit authorization:
 - Clinical videos/images
 - Restricted datasets
 - Unpublished sensitive research material
+- Patent-sensitive implementation details
 - Credentials or private configuration
+
+Kanthi Mam is currently preparing a patent application based on the team's research approach. Until the research team confirms what can be disclosed publicly, patent-sensitive implementation details should remain outside this public repository.
 
 Raw clinical data should remain in the approved storage environment.
 
@@ -286,18 +362,22 @@ Raw clinical data should remain in the approved storage environment.
 
 ## 🚧 Current Status
 
-**Research phase:** Initial AI/computer-vision task definition and repository setup.
+**Research phase:** Initial AI/computer-vision task definition and system-design expansion.
 
-**Current focus:** Four-camera 2D knee landmark detection and temporal tracking.
+**Current AI focus:** Four-camera 2D knee landmark detection and temporal tracking using the standardized 20-point reference.
 
-**Next milestone:** Receive and inspect the actual dataset and annotation resources before selecting and training the baseline model.
+**New systems direction:** Prototype a rover-mounted camera platform for controlled sideways movement and smoother subject tracking.
 
-The model architecture, final evaluation metrics, and later 2D-to-3D/clinical methodology will be determined from the available data, literature, and supervisor/orthopedic expert guidance.
+**Next AI milestone:** Receive and inspect the actual dataset and annotation resources before selecting and training the baseline model.
+
+**Next systems milestone:** Define and prototype the rover/camera movement requirements without committing to an unverified hardware architecture.
+
+The model architecture, final evaluation metrics, rover control method, and later 2D-to-3D/clinical methodology will be determined from the available data, literature, and supervisor/orthopedic/industrial expert guidance.
 
 ---
 
 ## 👥 Research Collaboration
 
-MedVision-2D3D is an interdisciplinary research effort involving **Computer Science and Electronics & Communication Engineering**, with future clinical interpretation informed by orthopedic expertise.
+MedVision-2D3D is an interdisciplinary research effort involving **Computer Science and Electronics & Communication Engineering**, with future clinical interpretation informed by orthopedic expertise and project development receiving industrial guidance.
 
-> This repository documents the research process while protecting restricted clinical and unpublished research material.
+> This repository documents the research process while protecting restricted clinical, unpublished, and patent-sensitive research material.
